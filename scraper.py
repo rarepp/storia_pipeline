@@ -60,16 +60,12 @@ def run_production_pipeline(total_pages=3):
                             href = href.replace("/ad/", "/oferta/")
                         full_url = href if href.startswith("http") else f"https://www.storia.ro/{href.lstrip('/')}"
 
+                    # --- FIXED: LABELS EXTRACITON ENGINE ---
                     location_obj = item.get("location", {})
                     labels = location_obj.get("labels", [])
-                    raw_neighborhood = "Necunoscut"
-                    if labels:
-                        for label in reversed(labels):
-                            if label.get("type") in ["QUARTER", "SUB_DISTRICT"]:
-                                raw_neighborhood = label.get("label")
-                                break
 
-                    neighborhood = resolve_exact_neighborhood(title, slug, raw_neighborhood)
+                    # Pass the correct `labels` object directly into our new config rules
+                    neighborhood = resolve_exact_neighborhood(title, slug, labels)
 
                     total_price_obj = item.get("totalPrice") or {}
                     total_price = total_price_obj.get("value") if isinstance(total_price_obj, dict) else None
