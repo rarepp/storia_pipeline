@@ -5,7 +5,7 @@ from market_intelligence import analyze_market_trends
 
 
 def main():
-    print("=== STARTING IAȘI REAL ESTATE DATA PIPELINE ===")
+    print("=== STARTING IAȘI REAL ESTATE DATA PIPELINE : STORIA ===")
 
     # 1. Execute scraper routine (Targeting first 3 pages)
     extracted_data = run_production_pipeline(total_pages=3)
@@ -13,7 +13,7 @@ def main():
     # 2. Feed raw matrix into the intelligence module for transformation & export
     analyze_market_trends(extracted_data)
 
-    print("=== PIPELINE LIFECYCLE COMPLETED SUCCESSFULLY ===")
+    print("=== STORIA PIPELINE LIFECYCLE COMPLETED SUCCESSFULLY ===")
 
 
 if __name__ == "__main__":
