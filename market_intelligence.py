@@ -59,3 +59,5 @@ def analyze_market_trends(properties_list, raw_export_path="iasi_market_data.xls
     # Export curated opportunities
     underpriced_deals.to_excel(curated_export_path, index=False)
     print(f"[++] PRODUCTION DATA SET DEPLOYED: '{curated_export_path}'")
+
+    return df.to_dict(orient="records")

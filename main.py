@@ -8,16 +8,15 @@ def main():
     print("=== STARTING IAȘI REAL ESTATE TELEMETRY PIPELINE ===")
 
     # 1. Scrape data fields across pages
-    extracted_data = run_production_pipeline(total_pages=3)
+    raw_data = run_production_pipeline(total_pages=3)
 
-    if extracted_data:
-        # 2. Run clean analytics and get rid of clones/duplicates
-        # We will modify your market_intelligence to return the clean dictionary list
-        analyze_market_trends(extracted_data)
+    if raw_data:
+        # 2. Clean data and capture the DE-DUPLICATED output list
+        clean_data = analyze_market_trends(raw_data)
 
-        # 3. Stream data straight into your local SQL database
+        # 3. Stream ONLY the perfectly unique listings to SQL storage
         print("[*] Syncing unique listings with SQL engine storage...")
-        save_daily_snapshot(extracted_data)
+        save_daily_snapshot(clean_data)
 
         print("=== PIPELINE LIFECYCLE COMPLETED SUCCESSFULLY ===")
     else:
